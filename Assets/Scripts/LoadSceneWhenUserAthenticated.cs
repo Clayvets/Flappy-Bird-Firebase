@@ -8,9 +8,8 @@ using UnityEngine.SceneManagement;
 public class LoadSceneWhenUserAthenticated : MonoBehaviour
 {
 
-    //[SerializeField]
-    //private string _sceneToLoad;
-    [SerializeField] GameObject perfil, inicio;
+    [SerializeField]
+    private string _sceneToLoad;
 
     // Start is called before the first frame update
     void Start()
@@ -22,9 +21,7 @@ public class LoadSceneWhenUserAthenticated : MonoBehaviour
     {
         if (FirebaseAuth.DefaultInstance.CurrentUser != null)
         {
-            inicio.SetActive(false);
-            perfil.SetActive(true);
-            // SceneManager.LoadScene(_sceneToLoad);
+            SceneManager.LoadScene(_sceneToLoad);
         }
     }
 

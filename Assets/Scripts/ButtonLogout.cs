@@ -10,7 +10,7 @@ public class ButtonLogout : MonoBehaviour, IPointerClickHandler
 {
     private DatabaseReference mDatabase;
 
-    string UserId;
+    private string UserId;
 
     public event Action OnLogout;
     // Start is called before the first frame update

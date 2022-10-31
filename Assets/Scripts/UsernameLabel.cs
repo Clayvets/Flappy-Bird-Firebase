@@ -40,7 +40,6 @@ public class UsernameLabel : MonoBehaviour
         }
 
     }
-   
 
     private void SetLabelUsername(string UserId)
     {
