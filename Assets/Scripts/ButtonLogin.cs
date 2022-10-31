@@ -16,6 +16,7 @@ public class ButtonLogin : MonoBehaviour
     private InputField _emailPasswordField;
     [SerializeField]
     private InputField _nickname;
+   
     
     private Coroutine _loginCoroutine;
 
@@ -59,14 +60,11 @@ public class ButtonLogin : MonoBehaviour
         else
         {
             Debug.Log($"Login succeeded with {loginTask.Result}");
+            
             OnLoginSucceeded?.Invoke(loginTask.Result);
-            SceneManager.LoadScene("GameScene");
+           
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

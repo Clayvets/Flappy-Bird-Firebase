@@ -66,10 +66,6 @@ namespace firebaseTest
             _registrationCoroutine = null;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        
     }
 }
