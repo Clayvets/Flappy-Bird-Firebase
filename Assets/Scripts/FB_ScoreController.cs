@@ -141,8 +141,8 @@ public class UserData
     public int score;
     public string username;
     public string[] friends;
-    public string[] request;
-    public string[] sendRequest;
+    public List<string> request = new List<string>();
+    public List<string> sendRequest = new List<string>();
 }
 
 public class UserInfo

@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using Firebase;
 using Firebase.Auth;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UsersOnlineController : MonoBehaviour
+public class UserOnlineController : MonoBehaviour
 {
     // Start is called before the first frame update
     DatabaseReference mDatabase;
@@ -14,12 +15,14 @@ public class UsersOnlineController : MonoBehaviour
     string UserId;
     [SerializeField]
     ButtonLogout _ButtonLogout;
+    [SerializeField] GameObject usuarioConectado;
+    [SerializeField] GameObject canvasPadre;
 
     void Start()
     {
         mDatabase = FirebaseDatabase.DefaultInstance.RootReference;
-        _GameState = GameObject.Find("Controller").GetComponent<GameState>();
-        _ButtonLogout = GameObject.Find("ButtonLogout").GetComponent<ButtonLogout>();
+        _GameState = GameObject.Find("Controller2").GetComponent<GameState>();
+       
         _GameState.OnDataReady += InitUsersOnlineController;
         UserId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
 
@@ -28,25 +31,33 @@ public class UsersOnlineController : MonoBehaviour
     public void InitUsersOnlineController()
     {
         FirebaseDatabase.DefaultInstance.LogLevel = LogLevel.Verbose;
-        Debug.Log("Init users online controller");
-        _ButtonLogout.OnLogout += SetUserOffline;
-        var userOnlineRef = FirebaseDatabase.DefaultInstance
-        .GetReference("users-online");
-
+        //Debug.Log("Init users online controller");
+        //_ButtonLogout.OnLogout += SetUserOffline;
+        var userOnlineRef = FirebaseDatabase.DefaultInstance.GetReference("users-online");
+       // print("ESTOY ONLINE BABEEE");
         mDatabase.Child("users-online").ChildAdded += HandleChildAdded;
         mDatabase.Child("users-online").ChildRemoved += HandleChildRemoved;
 
         SetUserOnline();
     }
     private void HandleChildAdded(object sender, ChildChangedEventArgs args)
-    {
+    {  
         if (args.DatabaseError != null)
         {
             Debug.LogError(args.DatabaseError.Message);
             return;
         }
+      
         Dictionary<string, object> userConnected = (Dictionary<string, object>)args.Snapshot.Value;
-        Debug.Log(userConnected["username"]+" is online");
+        Debug.Log(userConnected["username"] + " is online");
+       // Debug.Log("Mis ARGS: " + args.Snapshot.Key);
+        if (_GameState.Username == (string)userConnected["username"]) { return;}
+        
+        GameObject usuario = Instantiate(usuarioConectado, canvasPadre.transform);
+        usuario.name = (string)userConnected["username"];
+        usuario.GetComponentInChildren<Button>().gameObject.GetComponent<Request>().id = args.Snapshot.Key;
+        usuario.GetComponentInChildren<Text>().text = (string)userConnected["username"];
+        
     }
     private void HandleChildRemoved(object sender, ChildChangedEventArgs args)
     {
@@ -56,6 +67,8 @@ public class UsersOnlineController : MonoBehaviour
             return;
         }
         Dictionary<string, object> userDisconnected = (Dictionary<string, object>)args.Snapshot.Value;
+        GameObject desconectado = GameObject.Find((string)userDisconnected["username"]);
+        Destroy(desconectado);
         Debug.Log(userDisconnected["username"] + " is offline");
     }
 
@@ -84,15 +97,17 @@ public class UsersOnlineController : MonoBehaviour
     {
         mDatabase.Child("users-online").Child(UserId).Child("username").SetValueAsync(_GameState.Username);
     }
-    private void SetUserOffline()
-    {
-        mDatabase.Child("users-online").Child(UserId).SetValueAsync(null);
-    }
+    //private void SetUserOffline()
+    //{  
+    //    mDatabase.Child("users-online").Child(UserId).SetValueAsync(null);
+    //}
 
-    void OnApplicationQuit()
-    {
-        SetUserOffline();
-    }
+    //void OnApplicationQuit()
+    //{
+    //    SetUserOffline();
+    //}
+
+    
 }
     
 

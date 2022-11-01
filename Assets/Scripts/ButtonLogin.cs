@@ -16,7 +16,7 @@ public class ButtonLogin : MonoBehaviour
     private InputField _emailPasswordField;
     [SerializeField]
     private InputField _nickname;
-    
+   
     private Coroutine _loginCoroutine;
 
     public event Action<FirebaseUser> OnLoginSucceeded;
@@ -38,14 +38,15 @@ public class ButtonLogin : MonoBehaviour
 
     private void HandleLoginButtonClicked()
     {
-        if(_loginCoroutine == null)
-        {
+        //if(_loginCoroutine == null)
+        //{
+           
             _loginCoroutine = StartCoroutine(LoginCoroutine(_emailInputField.text, _emailPasswordField.text));
-        } 
+        //} 
     }
 
-    private IEnumerator LoginCoroutine(string email, string password)
-    {
+    private IEnumerator LoginCoroutine(string email, string password) {
+        print("estoy EN EL LOGIN ");
         var auth = FirebaseAuth.DefaultInstance;
         var loginTask = auth.SignInWithEmailAndPasswordAsync(email,password);
 
@@ -60,13 +61,11 @@ public class ButtonLogin : MonoBehaviour
         {
             Debug.Log($"Login succeeded with {loginTask.Result}");
             OnLoginSucceeded?.Invoke(loginTask.Result);
-            SceneManager.LoadScene("GameScene");
+            
+
         }
+       
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
