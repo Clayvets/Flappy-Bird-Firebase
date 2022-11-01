@@ -26,7 +26,7 @@ public class ButtonLogout : MonoBehaviour, IPointerClickHandler
         FirebaseAuth.DefaultInstance.SignOut();
         print("Hola mami salí");
         mDatabase.Child("users-online").Child(UserId).SetValueAsync(null);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
         
         
     }

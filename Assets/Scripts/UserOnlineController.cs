@@ -34,7 +34,7 @@ public class UserOnlineController : MonoBehaviour
         //Debug.Log("Init users online controller");
         //_ButtonLogout.OnLogout += SetUserOffline;
         var userOnlineRef = FirebaseDatabase.DefaultInstance.GetReference("users-online");
-        print("ESTOY ONLINE BABEEE");
+       // print("ESTOY ONLINE BABEEE");
         mDatabase.Child("users-online").ChildAdded += HandleChildAdded;
         mDatabase.Child("users-online").ChildRemoved += HandleChildRemoved;
 

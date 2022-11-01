@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 6646088619453215892}
   - component: {fileID: 6646088619453215889}
   - component: {fileID: 6646088619453215894}
+  - component: {fileID: 3021962713759943435}
   - component: {fileID: 6646088619453215895}
   m_Layer: 5
   m_Name: Add Friends
@@ -228,6 +229,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3021962713759943435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6646088619453215893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d646255e9c186824f86c5a3d8c3d7617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mybutton: {fileID: 6646088619453215895}
+  parent: {fileID: 7865199783560918492}
 --- !u!114 &6646088619453215895
 MonoBehaviour:
   m_ObjectHideFlags: 0
