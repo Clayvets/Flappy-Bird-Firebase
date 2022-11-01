@@ -9,11 +9,11 @@ public class Request : MonoBehaviour
 {
     [SerializeField] Button mybutton, acceptButton;
     public string id;
-    string nameOther;
+   
     DatabaseReference mDatabase;
     [SerializeField] GameObject parent;
     GameState _GameState;
-    GameObject accept;
+    
 
     
 
@@ -41,7 +41,7 @@ public class Request : MonoBehaviour
         var friends = FirebaseDatabase.DefaultInstance.GetReference("users").Child(id).Child("friends");
         var request = FirebaseDatabase.DefaultInstance.GetReference("users").Child(id).Child("request");
         mDatabase.Child("friends").ChildAdded += FriendAdded;
-        mDatabase.Child("request").ChildAdded += HandleChildAddedRequest;
+       // mDatabase.Child("request").ChildAdded += HandleChildAddedRequest;
     }
 
     private void FriendAdded(object sender, ChildChangedEventArgs args) {
@@ -53,24 +53,24 @@ public class Request : MonoBehaviour
         
         
     }
-    private void HandleChildAddedRequest(object sender, ChildChangedEventArgs args) {
-        if (args.DatabaseError != null) {
-            Debug.LogError(args.DatabaseError.Message);
-            return;
-        }
-        Dictionary<string, object> userAdded = (Dictionary<string, object>)args.Snapshot.Value;
-        nameOther= (string)userAdded["username"];
-        acceptButton = GameObject.Find("Accept").GetComponent<Button>();
-        acceptButton.onClick.AddListener(AcceptFriend);
+    //private void HandleChildAddedRequest(object sender, ChildChangedEventArgs args) {
+    //    if (args.DatabaseError != null) {
+    //        Debug.LogError(args.DatabaseError.Message);
+    //        return;
+    //    }
+    //    Dictionary<string, object> userAdded = (Dictionary<string, object>)args.Snapshot.Value;
+    //    nameOther= (string)userAdded["username"];
+    //    acceptButton = GameObject.Find("Accept").GetComponent<Button>();
+    //    acceptButton.onClick.AddListener(AcceptFriend);
         
-       // mDatabase.Child("users").Child(UserId).Child("request").SetValueAsync((string)userAddedToRequest["username"]);
-        //Button addButton = newAddButton.GetComponent<Button>();
-        //addButton.onClick.AddListener(AcceptRequest);
+    //   // mDatabase.Child("users").Child(UserId).Child("request").SetValueAsync((string)userAddedToRequest["username"]);
+    //    //Button addButton = newAddButton.GetComponent<Button>();
+    //    //addButton.onClick.AddListener(AcceptRequest);
 
-    }
+    //}
 
-    private void AcceptFriend() {
-        mDatabase.Child("users").Child(id).Child("friends").SetValueAsync(nameOther);
-    }
+    //private void AcceptFriend() {
+    //    mDatabase.Child("users").Child(id).Child("friends").SetValueAsync(nameOther);
+    //}
 
 }

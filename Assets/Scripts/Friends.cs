@@ -8,7 +8,41 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Friends : MonoBehaviour {
-   
+    string UserId;
+    string nameOther;
+    [SerializeField] Text mens;
+    [SerializeField] GameObject panel;
+    [SerializeField] Button  acceptButton;
+    DatabaseReference mDatabase;
+    private void Start() {
+        UserId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+        var request = FirebaseDatabase.DefaultInstance.GetReference("users").Child(UserId).Child("request");
 
+        mDatabase.Child("request").ChildAdded += HandleChildAddedRequest;
+       
+    }
+    private void HandleChildAddedRequest(object sender, ChildChangedEventArgs args) {
+        if (args.DatabaseError != null) {
+            Debug.LogError(args.DatabaseError.Message);
+            return;
+        }
+        print("ESTOY PIENDO SER AMIGO");
+        Dictionary<string, object> userAdded = (Dictionary<string, object>)args.Snapshot.Value;
+        nameOther = (string)userAdded["username"];
+        acceptButton = GameObject.Find("Accept").GetComponent<Button>();
+        panel.SetActive(true);
+        mens.text = nameOther + "  wants to be your friend!";
+        acceptButton.onClick.AddListener(AcceptFriend);
+
+        // mDatabase.Child("users").Child(UserId).Child("request").SetValueAsync((string)userAddedToRequest["username"]);
+        //Button addButton = newAddButton.GetComponent<Button>();
+        //addButton.onClick.AddListener(AcceptRequest);
+
+    }
+    private void AcceptFriend() {
+        
+       
+        mDatabase.Child("users").Child(UserId).Child("friends").SetValueAsync(nameOther);
+    }
 }
 
