@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Firebase;
 using Firebase.Auth;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UserOnlineController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class UserOnlineController : MonoBehaviour
     string UserId;
     [SerializeField]
     ButtonLogout _ButtonLogout;
+    [SerializeField] GameObject usuarioConectado;
+    [SerializeField] GameObject canvasPadre;
 
     void Start()
     {
@@ -38,14 +41,20 @@ public class UserOnlineController : MonoBehaviour
         SetUserOnline();
     }
     private void HandleChildAdded(object sender, ChildChangedEventArgs args)
-    {
+    {  
         if (args.DatabaseError != null)
         {
             Debug.LogError(args.DatabaseError.Message);
             return;
         }
+
         Dictionary<string, object> userConnected = (Dictionary<string, object>)args.Snapshot.Value;
-        Debug.Log(userConnected["username"]+" is online");
+        Debug.Log(userConnected["username"] + " is online");
+        if (_GameState.Username == (string)userConnected["username"]) {return;}
+        GameObject usuario = Instantiate(usuarioConectado, canvasPadre.transform);
+        usuario.name = (string)userConnected["username"];
+        usuario.GetComponentInChildren<Text>().text = (string)userConnected["username"];
+        
     }
     private void HandleChildRemoved(object sender, ChildChangedEventArgs args)
     {
@@ -55,6 +64,8 @@ public class UserOnlineController : MonoBehaviour
             return;
         }
         Dictionary<string, object> userDisconnected = (Dictionary<string, object>)args.Snapshot.Value;
+        GameObject desconectado = GameObject.Find((string)userDisconnected["username"]);
+        Destroy(desconectado);
         Debug.Log(userDisconnected["username"] + " is offline");
     }
 
@@ -92,6 +103,8 @@ public class UserOnlineController : MonoBehaviour
     //{
     //    SetUserOffline();
     //}
+
+    
 }
     
 
