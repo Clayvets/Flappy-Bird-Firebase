@@ -25,6 +25,7 @@ public class Friends : MonoBehaviour {
 
     }
     public void InitUsersOnlineController() {
+        print("la envié");
         FirebaseDatabase.DefaultInstance.LogLevel = LogLevel.Verbose;
         var request = FirebaseDatabase.DefaultInstance.GetReference("users").Child(UserId).Child("request");
         mDatabase.Child("request").ChildAdded += HandleChildAddedRequest;
