@@ -10,16 +10,24 @@ using UnityEngine.UI;
 public class Friends : MonoBehaviour {
     string UserId;
     string nameOther;
+    GameState _GameState;
     [SerializeField] Text mens;
     [SerializeField] GameObject panel;
     [SerializeField] Button  acceptButton;
     DatabaseReference mDatabase;
     private void Start() {
         UserId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-        var request = FirebaseDatabase.DefaultInstance.GetReference("users").Child(UserId).Child("request");
+        _GameState = GameObject.Find("Controller2").GetComponent<GameState>();
 
-        mDatabase.Child("request").ChildAdded += HandleChildAddedRequest;
+        _GameState.OnDataReady += InitUsersOnlineController;
        
+       // mDatabase.Child("request").ChildAdded += HandleChildAddedRequest;
+
+    }
+    public void InitUsersOnlineController() {
+        FirebaseDatabase.DefaultInstance.LogLevel = LogLevel.Verbose;
+        var request = FirebaseDatabase.DefaultInstance.GetReference("users").Child(UserId).Child("request");
+        mDatabase.Child("request").ChildAdded += HandleChildAddedRequest;
     }
     private void HandleChildAddedRequest(object sender, ChildChangedEventArgs args) {
         if (args.DatabaseError != null) {
