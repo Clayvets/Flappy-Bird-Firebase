@@ -5,6 +5,7 @@ using Firebase.Auth;
 using Firebase.Database;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class ButtonLogout : MonoBehaviour, IPointerClickHandler
 {
@@ -23,6 +24,11 @@ public class ButtonLogout : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         FirebaseAuth.DefaultInstance.SignOut();
-
+        print("Hola mami salí");
+        mDatabase.Child("users-online").Child(UserId).SetValueAsync(null);
+        SceneManager.LoadScene(1);
+        
+        
     }
+  
 }

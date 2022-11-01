@@ -6,7 +6,7 @@ using Firebase;
 using Firebase.Auth;
 using UnityEngine;
 
-public class UsersOnlineController : MonoBehaviour
+public class UserOnlineController : MonoBehaviour
 {
     // Start is called before the first frame update
     DatabaseReference mDatabase;
@@ -18,8 +18,8 @@ public class UsersOnlineController : MonoBehaviour
     void Start()
     {
         mDatabase = FirebaseDatabase.DefaultInstance.RootReference;
-        _GameState = GameObject.Find("Controller").GetComponent<GameState>();
-        _ButtonLogout = GameObject.Find("ButtonLogout").GetComponent<ButtonLogout>();
+        _GameState = GameObject.Find("Controller2").GetComponent<GameState>();
+       
         _GameState.OnDataReady += InitUsersOnlineController;
         UserId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
 
@@ -28,11 +28,10 @@ public class UsersOnlineController : MonoBehaviour
     public void InitUsersOnlineController()
     {
         FirebaseDatabase.DefaultInstance.LogLevel = LogLevel.Verbose;
-        Debug.Log("Init users online controller");
-        _ButtonLogout.OnLogout += SetUserOffline;
-        var userOnlineRef = FirebaseDatabase.DefaultInstance
-        .GetReference("users-online");
-
+        //Debug.Log("Init users online controller");
+        //_ButtonLogout.OnLogout += SetUserOffline;
+        var userOnlineRef = FirebaseDatabase.DefaultInstance.GetReference("users-online");
+        print("ESTOY ONLINE BABEEE");
         mDatabase.Child("users-online").ChildAdded += HandleChildAdded;
         mDatabase.Child("users-online").ChildRemoved += HandleChildRemoved;
 
@@ -84,15 +83,15 @@ public class UsersOnlineController : MonoBehaviour
     {
         mDatabase.Child("users-online").Child(UserId).Child("username").SetValueAsync(_GameState.Username);
     }
-    private void SetUserOffline()
-    {
-        mDatabase.Child("users-online").Child(UserId).SetValueAsync(null);
-    }
+    //private void SetUserOffline()
+    //{  
+    //    mDatabase.Child("users-online").Child(UserId).SetValueAsync(null);
+    //}
 
-    void OnApplicationQuit()
-    {
-        SetUserOffline();
-    }
+    //void OnApplicationQuit()
+    //{
+    //    SetUserOffline();
+    //}
 }
     
 

@@ -16,18 +16,19 @@ public class GameState : MonoBehaviour
     public event Action OnDataReady;
 
 
-    void Start()
-    {
-        mDatabase=FirebaseDatabase.DefaultInstance.RootReference;
+    void Start() {
+        
+        mDatabase =FirebaseDatabase.DefaultInstance.RootReference;
         UserId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
         GetUserData();
     }
-    private void GetUserData(){
-
+    
+    public void GetUserData(){
+        print("ENTRO A GET USER DATA");
         FirebaseDatabase.DefaultInstance.GetReference("users/" + UserId).GetValueAsync().ContinueWith(task => {
             if(task.IsFaulted)
             {
-                print("Hola aqui pasando");
+                Debug.LogWarning("Hola aqui pasando");
             }
             else if(task.IsCompleted){
 
@@ -36,7 +37,7 @@ public class GameState : MonoBehaviour
                 Debug.Log(@"user connected:" + "username:" + userData["username"] + 
                           "  score: "+ userData["score"]);
                 Username=(string)userData["username"];
-                Score=int.Parse((string)userData["score"]);
+                //Score=int.Parse((string)userData["score"]);
 
                 OnDataReady?.Invoke();
             }

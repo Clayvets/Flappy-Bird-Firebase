@@ -10,6 +10,7 @@ public class LoadSceneWhenUserAthenticated : MonoBehaviour
 
     [SerializeField]
     private string _sceneToLoad;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,8 @@ public class LoadSceneWhenUserAthenticated : MonoBehaviour
     {
         if (FirebaseAuth.DefaultInstance.CurrentUser != null)
         {
-            SceneManager.LoadScene(_sceneToLoad);
+            SceneManager.LoadScene(0);
+          
         }
     }
 
