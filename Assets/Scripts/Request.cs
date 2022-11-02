@@ -9,7 +9,7 @@ public class Request : MonoBehaviour
 {
     [SerializeField] Button mybutton, acceptButton;
     public string id;
-   
+    string UserId;
     DatabaseReference mDatabase;
     [SerializeField] GameObject parent;
     GameState _GameState;
@@ -20,7 +20,7 @@ public class Request : MonoBehaviour
     void Start() {
         _GameState = GameObject.Find("Controller2").GetComponent<GameState>();
         mDatabase = FirebaseDatabase.DefaultInstance.RootReference;
-        
+        UserId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
         //mDatabase.Child("users").ChildAdded += SendRequest;
         mybutton.onClick.AddListener(startRequestController);
     }
@@ -32,8 +32,8 @@ public class Request : MonoBehaviour
         //startRequestController();
         //FirebaseDatabase.DefaultInstance.GetReference("users").Child(UserId).Child("sendRequest");
         //mDatabase.Child("users").Child(id).Child("sendRequest").SetValueAsync(parent.name);
-        mDatabase.Child("users").Child(id).Child("request").SetValueAsync(_GameState.Username);
-        
+        mDatabase.Child("users").Child(id).Child("request").Child(UserId).Child("user").SetValueAsync(_GameState.Username);
+
         print("MANDE TODO");
     }
     public void startRequestController() {

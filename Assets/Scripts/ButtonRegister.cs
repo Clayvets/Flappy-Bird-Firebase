@@ -42,7 +42,9 @@ namespace firebaseTest
             var registerTask = auth.CreateUserWithEmailAndPasswordAsync(email, password);
 
             yield return new WaitUntil(() => registerTask.IsCompleted);
+            print("ahhhh: ");
 
+           print("correo: " + registerTask.Result);
             if (registerTask.Exception != null)
             {
                 Debug.LogWarning($"Failed to register task {registerTask.Exception}");
