@@ -28,7 +28,8 @@ public class Friends : MonoBehaviour {
         print("la envié");
         FirebaseDatabase.DefaultInstance.LogLevel = LogLevel.Verbose;
         var request = FirebaseDatabase.DefaultInstance.GetReference("users").Child(UserId).Child("request");
-        mDatabase.Child("request").ChildAdded += HandleChildAddedRequest;
+        mDatabase.Child("users").Child(UserId).Child("request").ChildAdded += HandleChildAddedRequest;
+        //mDatabase.Child("request").ChildAdded += HandleChildAddedRequest;
     }
     private void HandleChildAddedRequest(object sender, ChildChangedEventArgs args) {
         if (args.DatabaseError != null) {
