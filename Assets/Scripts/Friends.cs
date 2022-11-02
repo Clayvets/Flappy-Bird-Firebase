@@ -18,7 +18,7 @@ public class Friends : MonoBehaviour {
     private void Start() {
         UserId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
         _GameState = GameObject.Find("Controller2").GetComponent<GameState>();
-
+        print("ESTOY EN FRIENDS");
         _GameState.OnDataReady += InitUsersOnlineController;
        
        // mDatabase.Child("request").ChildAdded += HandleChildAddedRequest;
