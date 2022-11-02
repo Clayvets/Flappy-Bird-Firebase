@@ -22,14 +22,14 @@ public class Request : MonoBehaviour
         mDatabase = FirebaseDatabase.DefaultInstance.RootReference;
         
         //mDatabase.Child("users").ChildAdded += SendRequest;
-        mybutton.onClick.AddListener(SendRequest);
+        mybutton.onClick.AddListener(startRequestController);
     }
 
     private void SendRequest() {
 
 
         //string json = JsonUtility.ToJson(user);
-        startRequestController();
+        //startRequestController();
         //FirebaseDatabase.DefaultInstance.GetReference("users").Child(UserId).Child("sendRequest");
         //mDatabase.Child("users").Child(id).Child("sendRequest").SetValueAsync(parent.name);
         mDatabase.Child("users").Child(id).Child("request").SetValueAsync(_GameState.Username);
@@ -41,6 +41,7 @@ public class Request : MonoBehaviour
         var friends = FirebaseDatabase.DefaultInstance.GetReference("users").Child(id).Child("friends");
         var request = FirebaseDatabase.DefaultInstance.GetReference("users").Child(id).Child("request");
         mDatabase.Child("friends").ChildAdded += FriendAdded;
+        SendRequest();
        // mDatabase.Child("request").ChildAdded += HandleChildAddedRequest;
     }
 
