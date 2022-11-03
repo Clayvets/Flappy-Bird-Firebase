@@ -120,8 +120,15 @@ public class UserOnlineController : MonoBehaviour
     void DesactivarNotificacion() {
         notificacion.SetActive(false);
     }
+    private void SetUserOffline() {
+        mDatabase.Child("users-online").Child(UserId).SetValueAsync(null);
+    }
 
-    
+    void OnApplicationQuit() {
+        SetUserOffline();
+    }
+
+
 }
-    
+
 

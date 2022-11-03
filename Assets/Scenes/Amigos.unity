@@ -560,7 +560,7 @@ RectTransform:
   m_GameObject: {fileID: 709324213}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.78749, z: 1}
+  m_LocalScale: {x: 0.56311655, y: 0.5481403, z: 1}
   m_Children: []
   m_Father: {fileID: 1821006010}
   m_RootOrder: 0
@@ -568,7 +568,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 20.728, y: 7.4911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &709324215
 MonoBehaviour:
@@ -592,7 +592,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 15
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -772,15 +772,15 @@ RectTransform:
   m_GameObject: {fileID: 857249281}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0125, y: 0.47498, z: 1}
+  m_LocalScale: {x: 0.5568649, y: 0.255297, z: 1}
   m_Children: []
   m_Father: {fileID: 65076440}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.0405, y: -2.6}
-  m_SizeDelta: {x: 77.8888, y: 33.09211}
+  m_AnchoredPosition: {x: -1.8, y: -1}
+  m_SizeDelta: {x: 214.8127, y: 59.6599}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &857249283
 MonoBehaviour:
@@ -804,12 +804,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 17
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1489,6 +1489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679648b227eeb4e46a72c5dff99e7712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 857249283}
   users: 0
   usersNeeded: 2
   binitMatch: {fileID: 1485928021}

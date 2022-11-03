@@ -12,7 +12,7 @@ public class MatchManager : MonoBehaviour {
     DatabaseReference mDatabase;
     GameState _GameState;
     string UserId;
-    Text text;
+    [SerializeField]Text text;
     [SerializeField] int  users =0, usersNeeded = 2;
     [SerializeField] Button binitMatch, bexitMatch;
     [SerializeField] GameObject canvaMatch;
@@ -50,9 +50,11 @@ public class MatchManager : MonoBehaviour {
 
         Dictionary<string, object> matchUsers = (Dictionary<string, object>)args.Snapshot.Value;
         users+= 1;
-        text.text=canvaMatch.GetComponentInChildren<Text>().text = users + "/" + usersNeeded;
+        text.text= users + "/" + usersNeeded;
         Debug.Log("Numero "+ users +"Estan en sala: "+ matchUsers["username"]);
-        if (users >= usersNeeded) text.text = "Ready"; 
+        if (users >= usersNeeded) {
+            text.text = users + "/" + usersNeeded + " Ready";
+        }
        
         
 
@@ -62,9 +64,15 @@ public class MatchManager : MonoBehaviour {
             Debug.LogError(args.DatabaseError.Message);
             return;
         }
-        //Dictionary<string, object> userDisconnected = (Dictionary<string, object>)args.Snapshot.Value;
-       
+        if (users <= 0) { return; }
 
+        users -= 1;
+        //Dictionary<string, object> userDisconnected = (Dictionary<string, object>)args.Snapshot.Value;
+
+
+    }
+    private void OnApplicationQuit() {
+        exitMatch();
     }
 
 }
