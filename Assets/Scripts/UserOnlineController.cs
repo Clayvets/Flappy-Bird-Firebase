@@ -15,8 +15,8 @@ public class UserOnlineController : MonoBehaviour
     string UserId;
     [SerializeField]
     ButtonLogout _ButtonLogout;
-    [SerializeField] GameObject usuarioConectado;
-    [SerializeField] GameObject canvasPadre;
+    [SerializeField] GameObject usuarioConectado, amigoConectado;
+    [SerializeField] GameObject canvasPadre, canvaAmigo;
 
     void Start()
     {
@@ -52,7 +52,12 @@ public class UserOnlineController : MonoBehaviour
         Debug.Log(userConnected["username"] + " is online");
         //Debug.Log("Mis ARGS: " + args.Snapshot.Value);
         if (_GameState.Username == (string)userConnected["username"]) { return;}
-       // if () { }
+        if (_GameState.friends.ContainsKey(args.Snapshot.Key)) {
+            print("Tengo un amigo: " + (string)userConnected["username"]);
+            GameObject amigo = Instantiate(amigoConectado, canvaAmigo.transform);
+            amigo.GetComponentInChildren<Text>().text = (string)userConnected["username"];
+            return;
+        }
         //print("Mi amigo: " + (string)userConnected);
         GameObject usuario = Instantiate(usuarioConectado, canvasPadre.transform);
         usuario.name = (string)userConnected["username"];

@@ -1018,7 +1018,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ButtonLogout: {fileID: 2010960854158383310}
   usuarioConectado: {fileID: 7865199783560918492, guid: 0798f587ff8e452469989f7ead3d5517, type: 3}
+  amigoConectado: {fileID: 6567957184043313027, guid: 954595a185105694d8c2222b073dd6be, type: 3}
   canvasPadre: {fileID: 429317806}
+  canvaAmigo: {fileID: 6542650031563866859}
 --- !u!114 &1762860510
 MonoBehaviour:
   m_ObjectHideFlags: 0

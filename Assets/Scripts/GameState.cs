@@ -9,7 +9,7 @@ public class GameState : MonoBehaviour
 {
     public int Score;
     public string Username;
-    public Dictionary<string, object> friends = new Dictionary<string, object>();
+    public Dictionary<string, string> friends = new Dictionary<string, string>();
     public string UserId;
 
     DatabaseReference mDatabase;
@@ -53,14 +53,22 @@ public class GameState : MonoBehaviour
             } else if (task.IsCompleted) {
 
                 DataSnapshot snapshot = task.Result;
+
+                //friends = (Dictionary<string, object>)snapshot.
                 
                 Dictionary<string, object> friendsData = (Dictionary<string, object>)snapshot.Value;
-                
+                print("snappp" + friendsData);
+               
                 if (friendsData != null) {
                     foreach (var friensDoc in friendsData) {
-                        friends = (Dictionary<string, object>)friensDoc.Value;
+                        Dictionary<string, object> friendsDic = (Dictionary<string, object>)friensDoc.Value;
 
-                        Debug.Log("My FRIEND: " + friends["user"]);
+                        //Dictionary < string, Dictionary<string, object>>friends = (Dictionary<string, Dictionary<string, object>>)friensDoc.Value;
+                        friends.Add( friensDoc.Key, (string)friendsDic["user"]);
+                        Debug.Log("Key: " + friends[(string)friensDoc.Key]);
+                        Debug.Log("My FRIEND: " + friendsDic["user"]);
+                        
+
 
                     }
                 }
@@ -71,4 +79,9 @@ public class GameState : MonoBehaviour
         });
 
     }
+}
+public class Friend {
+    public string id; 
+    public string user;
+    
 }
