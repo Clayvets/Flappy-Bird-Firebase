@@ -30,12 +30,11 @@ public class Friends : MonoBehaviour {
 
     }
     public void InitUsersOnlineController() {
-        print("la envié");
+        
         FirebaseDatabase.DefaultInstance.LogLevel = LogLevel.Verbose;
         var request = FirebaseDatabase.DefaultInstance.GetReference("users").Child(UserId).Child("request");
-        print("Mi token: " + UserId);
         mDatabase.Child("users").Child(UserId).Child("request").ChildAdded += HandleChildAddedRequest;
-        print("Suscribbuendo a ser tu amigo");
+        
         //mDatabase.Child("request").ChildAdded += HandleChildAddedRequest;
     }
     private void HandleChildAddedRequest(object sender, ChildChangedEventArgs args) {

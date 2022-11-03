@@ -53,11 +53,14 @@ public class GameState : MonoBehaviour
             } else if (task.IsCompleted) {
 
                 DataSnapshot snapshot = task.Result;
+                
                 Dictionary<string, object> friendsData = (Dictionary<string, object>)snapshot.Value;
+                
                 if (friendsData != null) {
                     foreach (var friensDoc in friendsData) {
-                        Dictionary<string, object> userOnline = (Dictionary<string, object>)friensDoc.Value;
-                        Debug.Log("My FRIEND: " + userOnline["user"]);
+                        friends = (Dictionary<string, object>)friensDoc.Value;
+
+                        Debug.Log("My FRIEND: " + friends["user"]);
 
                     }
                 }
