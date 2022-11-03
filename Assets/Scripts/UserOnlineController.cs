@@ -63,6 +63,7 @@ public class UserOnlineController : MonoBehaviour
         //print("Mi amigo: " + (string)userConnected);
         GameObject usuario = Instantiate(usuarioConectado, canvasPadre.transform);
         usuario.name = (string)userConnected["username"];
+        usuario.GetComponentInChildren<Button>().gameObject.GetComponent<Request>().nameUser = (string)userConnected["username"];
         usuario.GetComponentInChildren<Button>().gameObject.GetComponent<Request>().id = args.Snapshot.Key;
         usuario.GetComponentInChildren<Text>().text = (string)userConnected["username"];
         
