@@ -59,8 +59,7 @@ public class Friends : MonoBehaviour {
 
     }
     private void AcceptFriend() {
-        mDatabase.Child("users").Child(UserId).Child("request").ChildRemoved += HandleChildRemoved;
-       mDatabase.Child("users").Child(UserId).Child("friends").Child(newFriendId).Child("user").SetValueAsync(nameOther);
+        mDatabase.Child("users").Child(UserId).Child("friends").Child(newFriendId).Child("user").SetValueAsync(nameOther);
         mDatabase.Child("users").Child(newFriendId).Child("friends").Child(UserId).Child("user").SetValueAsync(_GameState.Username);
         mDatabase.Child("users").Child(UserId).Child("request").Child(newFriendId).SetValueAsync(null);
         GameObject desAmigo = GameObject.Find(nameOther);
@@ -71,19 +70,7 @@ public class Friends : MonoBehaviour {
         //mDatabase.Child("users").Child(UserId).Child("friends").Child("user").SetValueAsync(nameOther);
         panel.SetActive(false);
     }
-    private void HandleChildRemoved(object sender, ChildChangedEventArgs args) {
-        if (args.DatabaseError != null) {
-            Debug.LogError(args.DatabaseError.Message);
-            return;
-        }
-        GameObject desAmigo = GameObject.Find(nameOther);
-        Destroy(desAmigo);
-        GameObject amigo = Instantiate(amigoConectado, canvaAmigo.transform);
-        amigo.name = nameOther;
-        amigo.GetComponentInChildren<Text>().text = nameOther;
 
-    }
-
-
+   
 }
 
