@@ -56,9 +56,6 @@ public class Friends : MonoBehaviour {
         mens.text = nameOther + " wants to be your friend!";
         acceptButton.onClick.AddListener(AcceptFriend);
 
-        // mDatabase.Child("users").Child(UserId).Child("request").SetValueAsync((string)userAddedToRequest["username"]);
-        //Button addButton = newAddButton.GetComponent<Button>();
-        //addButton.onClick.AddListener(AcceptRequest);
 
     }
     private void AcceptFriend() {

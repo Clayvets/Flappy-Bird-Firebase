@@ -15,7 +15,7 @@ public class UserOnlineController : MonoBehaviour
     string UserId;
     [SerializeField]
     ButtonLogout _ButtonLogout;
-    [SerializeField] GameObject usuarioConectado, amigoConectado;
+    [SerializeField] GameObject usuarioConectado, amigoConectado, notificacion;
     [SerializeField] GameObject canvasPadre, canvaAmigo;
 
     void Start()
@@ -56,6 +56,7 @@ public class UserOnlineController : MonoBehaviour
             print("Tengo un amigo: " + (string)userConnected["username"]);
             GameObject amigo = Instantiate(amigoConectado, canvaAmigo.transform);
             amigo.name = (string)userConnected["username"];
+            AmigoEstadoNotificacion(" has connected", (string)userConnected["username"]);
             amigo.GetComponentInChildren<Text>().text = (string)userConnected["username"];
             return;
         }
@@ -76,6 +77,10 @@ public class UserOnlineController : MonoBehaviour
         Dictionary<string, object> userDisconnected = (Dictionary<string, object>)args.Snapshot.Value;
         GameObject desconectado = GameObject.Find((string)userDisconnected["username"]);
         Destroy(desconectado);
+        if (_GameState.friends.ContainsKey(args.Snapshot.Key)) {
+            AmigoEstadoNotificacion(" has disconnected", (string)userDisconnected["username"]);
+        }
+       
         
         Debug.Log(userDisconnected["username"] + " is offline");
     }
@@ -95,6 +100,7 @@ public class UserOnlineController : MonoBehaviour
             foreach (var userDoc in usersList)
             {
                 Dictionary<string, object> userOnline = (Dictionary<string, object>)userDoc.Value;
+                
                 Debug.Log("ONLINE:" + userOnline["username"]);
                 
             }
@@ -105,15 +111,15 @@ public class UserOnlineController : MonoBehaviour
     {
         mDatabase.Child("users-online").Child(UserId).Child("username").SetValueAsync(_GameState.Username);
     }
-    //private void SetUserOffline()
-    //{  
-    //    mDatabase.Child("users-online").Child(UserId).SetValueAsync(null);
-    //}
+    void AmigoEstadoNotificacion(string m, string name) {
+        notificacion.SetActive(true);
+        notificacion.GetComponentInChildren<Text>().text =name + m;
+        Invoke("DesactivarNotificacion", 2);
+    }
 
-    //void OnApplicationQuit()
-    //{
-    //    SetUserOffline();
-    //}
+    void DesactivarNotificacion() {
+        notificacion.SetActive(false);
+    }
 
     
 }

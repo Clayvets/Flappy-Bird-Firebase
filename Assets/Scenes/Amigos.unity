@@ -1019,6 +1019,7 @@ MonoBehaviour:
   _ButtonLogout: {fileID: 2010960854158383310}
   usuarioConectado: {fileID: 7865199783560918492, guid: 0798f587ff8e452469989f7ead3d5517, type: 3}
   amigoConectado: {fileID: 6567957184043313027, guid: 954595a185105694d8c2222b073dd6be, type: 3}
+  notificacion: {fileID: 6542650032492742605}
   canvasPadre: {fileID: 429317806}
   canvaAmigo: {fileID: 6542650031563866859}
 --- !u!114 &1762860510
@@ -1351,7 +1352,7 @@ RectTransform:
   m_Children:
   - {fileID: 2010960855040104521}
   m_Father: {fileID: 2010960855132671284}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1452,7 +1453,6 @@ RectTransform:
   - {fileID: 6542650031563866856}
   - {fileID: 6542650032178507370}
   - {fileID: 6542650032380632823}
-  - {fileID: 6542650032492742602}
   - {fileID: 2010960854158383311}
   m_Father: {fileID: 4484359642042696896}
   m_RootOrder: 0
@@ -1625,6 +1625,7 @@ RectTransform:
   - {fileID: 2010960855132671284}
   - {fileID: 6542650033335743824}
   - {fileID: 325183728}
+  - {fileID: 6542650032492742602}
   m_Father: {fileID: 1444806372}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2181,15 +2182,15 @@ RectTransform:
   m_GameObject: {fileID: 6542650032492742605}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.19586, y: 0.19586, z: 0.19586}
+  m_LocalScale: {x: 0.3379909, y: 0.3379909, z: 0.3379909}
   m_Children:
   - {fileID: 6542650032325500093}
-  m_Father: {fileID: 2010960855132671284}
-  m_RootOrder: 4
+  m_Father: {fileID: 4484359642042696896}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0007324219, y: -65.02469}
+  m_AnchoredPosition: {x: -4, y: 212}
   m_SizeDelta: {x: 886.691, y: 264.0205}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6542650032492742603
