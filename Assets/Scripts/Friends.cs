@@ -16,8 +16,10 @@ public class Friends : MonoBehaviour {
     [SerializeField] GameObject panel;
     [SerializeField] Button  acceptButton;
     DatabaseReference mDatabase;
+    [SerializeField] GameObject amigoConectado, canvaAmigo;
 
-    
+
+
 
     private void Start() {
         mDatabase = FirebaseDatabase.DefaultInstance.RootReference;
@@ -63,12 +65,15 @@ public class Friends : MonoBehaviour {
         mDatabase.Child("users").Child(UserId).Child("friends").Child(newFriendId).Child("user").SetValueAsync(nameOther);
         mDatabase.Child("users").Child(newFriendId).Child("friends").Child(UserId).Child("user").SetValueAsync(_GameState.Username);
         mDatabase.Child("users").Child(UserId).Child("request").Child(newFriendId).SetValueAsync(null);
+        GameObject desAmigo = GameObject.Find(nameOther);
+        Destroy(desAmigo);
+        GameObject amigo = Instantiate(amigoConectado, canvaAmigo.transform);
+        amigo.name = nameOther;
+        amigo.GetComponentInChildren<Text>().text = nameOther;
         //mDatabase.Child("users").Child(UserId).Child("friends").Child("user").SetValueAsync(nameOther);
         panel.SetActive(false);
     }
 
-    void ShowFriends() {
-
-    }
+   
 }
 

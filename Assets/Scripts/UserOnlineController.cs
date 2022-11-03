@@ -55,6 +55,7 @@ public class UserOnlineController : MonoBehaviour
         if (_GameState.friends.ContainsKey(args.Snapshot.Key)) {
             print("Tengo un amigo: " + (string)userConnected["username"]);
             GameObject amigo = Instantiate(amigoConectado, canvaAmigo.transform);
+            amigo.name = (string)userConnected["username"];
             amigo.GetComponentInChildren<Text>().text = (string)userConnected["username"];
             return;
         }
@@ -75,6 +76,7 @@ public class UserOnlineController : MonoBehaviour
         Dictionary<string, object> userDisconnected = (Dictionary<string, object>)args.Snapshot.Value;
         GameObject desconectado = GameObject.Find((string)userDisconnected["username"]);
         Destroy(desconectado);
+        
         Debug.Log(userDisconnected["username"] + " is offline");
     }
 
