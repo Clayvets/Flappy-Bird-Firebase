@@ -2376,7 +2376,7 @@ GameObject:
   - component: {fileID: 6542650031563866857}
   - component: {fileID: 6542650031563866860}
   m_Layer: 5
-  m_Name: Lista de amigos conectados
+  m_Name: ListaAmigos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
