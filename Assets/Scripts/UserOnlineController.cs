@@ -50,9 +50,9 @@ public class UserOnlineController : MonoBehaviour
       
         Dictionary<string, object> userConnected = (Dictionary<string, object>)args.Snapshot.Value;
         Debug.Log(userConnected["username"] + " is online");
-       // Debug.Log("Mis ARGS: " + args.Snapshot.Key);
+        Debug.Log("Mis ARGS: " + args.Snapshot.Value);
         if (_GameState.Username == (string)userConnected["username"]) { return;}
-        
+        //print("Mi amigo: " + (string)userConnected);
         GameObject usuario = Instantiate(usuarioConectado, canvasPadre.transform);
         usuario.name = (string)userConnected["username"];
         usuario.GetComponentInChildren<Button>().gameObject.GetComponent<Request>().id = args.Snapshot.Key;

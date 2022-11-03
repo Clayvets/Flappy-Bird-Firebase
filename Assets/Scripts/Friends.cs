@@ -54,8 +54,8 @@ public class Friends : MonoBehaviour {
 
     }
     private void AcceptFriend() {
-        
-        mDatabase.Child("users").Child(UserId).Child("friends").Child(UserId).Child("user").SetValueAsync(nameOther);
+        //mDatabase.Child("users").Child(UserId).Child("friends").Child(UserId).Child("user").SetValueAsync(nameOther);
+        mDatabase.Child("users").Child(UserId).Child("friends").Child("user").SetValueAsync(nameOther);
         panel.SetActive(false);
     }
 
