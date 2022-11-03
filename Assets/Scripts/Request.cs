@@ -13,7 +13,7 @@ public class Request : MonoBehaviour
     DatabaseReference mDatabase;
     [SerializeField] GameObject parent;
     GameState _GameState;
-    
+    [SerializeField] Friends friends;
 
     
 
@@ -26,9 +26,9 @@ public class Request : MonoBehaviour
     }
 
     private void SendRequest() {
-        //mDatabase.Child("users").Child(id).Child("request").Child(UserId).Child("user").SetValueAsync(_GameState.Username);
-
-        mDatabase.Child("users").Child(id).Child("request").Child("user").SetValueAsync(_GameState.Username);
+        mDatabase.Child("users").Child(id).Child("request").Child(UserId).Child("user").SetValueAsync(_GameState.Username);
+        
+        //mDatabase.Child("users").Child(id).Child("request").Child("user").SetValueAsync(_GameState.Username);
 
         print("MANDE TODO");
     }

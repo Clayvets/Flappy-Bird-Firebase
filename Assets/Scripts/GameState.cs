@@ -9,7 +9,7 @@ public class GameState : MonoBehaviour
 {
     public int Score;
     public string Username;
-    public Dictionary<string, string> friends = new Dictionary<string, string>();
+    public Dictionary<string, object> friends = new Dictionary<string, object>();
     public string UserId;
 
     DatabaseReference mDatabase;
@@ -63,7 +63,7 @@ public class GameState : MonoBehaviour
                 }
                 //Score=int.Parse((string)userData["score"]);
 
-                OnDataReady?.Invoke();
+                //OnDataReady?.Invoke();
             }
         });
 
