@@ -68,7 +68,6 @@ public class MatchManager : MonoBehaviour {
 
         users -= 1;
         text.text = users + "/" + usersNeeded;
-        //Dictionary<string, object> userDisconnected = (Dictionary<string, object>)args.Snapshot.Value;
 
 
     }

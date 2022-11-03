@@ -21,24 +21,19 @@ public class Request : MonoBehaviour
         _GameState = GameObject.Find("Controller2").GetComponent<GameState>();
         mDatabase = FirebaseDatabase.DefaultInstance.RootReference;
         UserId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-        //mDatabase.Child("users").ChildAdded += SendRequest;
         mybutton.onClick.AddListener(startRequestController);
     }
 
     private void SendRequest() {
         mDatabase.Child("users").Child(id).Child("request").Child(UserId).Child("user").SetValueAsync(_GameState.Username);
-        
-        //mDatabase.Child("users").Child(id).Child("request").Child("user").SetValueAsync(_GameState.Username);
-
-        print("MANDE TODO");
+       
+       
     }
     public void startRequestController() {
-       // var requestsSend = FirebaseDatabase.DefaultInstance.GetReference("users").Child(UserId).Child("sendRequest");
         var friends = FirebaseDatabase.DefaultInstance.GetReference("users").Child(id).Child("friends");
         var request = FirebaseDatabase.DefaultInstance.GetReference("users").Child(id).Child("request");
         mDatabase.Child("friends").ChildAdded += FriendAdded;
         SendRequest();
-       // mDatabase.Child("request").ChildAdded += HandleChildAddedRequest;
     }
 
     private void FriendAdded(object sender, ChildChangedEventArgs args) {
@@ -47,9 +42,12 @@ public class Request : MonoBehaviour
             return;
         }
         Dictionary<string, object> userAdded = (Dictionary<string, object>)args.Snapshot.Value;
-        
-        
+
+
     }
+   
+    //Dictionary<string, object> userDisconnected = (Dictionary<string, object>)args.Snapshot.Value;
+
     //private void HandleChildAddedRequest(object sender, ChildChangedEventArgs args) {
     //    if (args.DatabaseError != null) {
     //        Debug.LogError(args.DatabaseError.Message);
@@ -59,7 +57,7 @@ public class Request : MonoBehaviour
     //    nameOther= (string)userAdded["username"];
     //    acceptButton = GameObject.Find("Accept").GetComponent<Button>();
     //    acceptButton.onClick.AddListener(AcceptFriend);
-        
+
     //   // mDatabase.Child("users").Child(UserId).Child("request").SetValueAsync((string)userAddedToRequest["username"]);
     //    //Button addButton = newAddButton.GetComponent<Button>();
     //    //addButton.onClick.AddListener(AcceptRequest);
